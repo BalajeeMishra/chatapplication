@@ -18,12 +18,18 @@ const append = (message, position) => {
 
 const n = prompt("Enter your name to join ");
 // const name = "balajee";
+if(n!=(null||"")){
 socket.emit("new-user-joined", n);
 socket.on("user-joined", n => {
+  
     append(`${n} joined the chat`, "right");
+    
 });
 socket.on("receive", data => {
-    append(`${data.n} : ${data.message}`, "left");
+    console.log(data.n);
+    if(data.n !== n){
+    append(`${data.n} : \n${data.message}`, "left");
+    }
 });
 socket.on("left", n => {
     append(`${n} left the chat`, "right");
@@ -32,11 +38,8 @@ form.addEventListener("submit", (e) => {
     e.preventDefault();
     const message = messageInput.value;
     // const message = messageInput.innerText;
-    append(`you:${message}`, "right");
+    append(`${message}`, "right");
     socket.emit("send", message);
     messageInput.value = "";
 })
-
-
-
-
+}

@@ -2,21 +2,20 @@
 const express=require("express");
 const app=express();
 const httpServer=require("http").createServer(app);
-const options={ /* ... */};
-const io = require("socket.io")(httpServer,options);
+const io = require("socket.io")(httpServer);
 const path = require("path");
 
 const users = {};
 io.on("connection", socket => {
     socket.on("new-user-joined", n => {
-        console.log("new user ", n);
         users[socket.id] = n;
         // socket.brodcast.emit("user-joined", n);
         io.sockets.emit("user-joined", n);
     });
 
     socket.on("send", message => {
-        // socket.brodcast.emit("receive", { message: message, n: users[socket.id] })
+        // socket.brodcast.emit("receive", { message: message, n: users[socket.id] });
+
         io.sockets.emit("receive", { message: message, n: users[socket.id] });
     })
     socket.on("disconnect", message => {
@@ -34,10 +33,6 @@ app.get("/",(req,res)=>{
   
      res.render("index")
 })
-const PORT=process.env.PORT||8000
-// app.listen(PORT,(req,res)=>{
-//     console.log("connected");
-//      hello world 
-// })
+const PORT=process.env.PORT||3000
 httpServer.listen(PORT);
 
