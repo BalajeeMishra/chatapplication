@@ -1,7 +1,11 @@
-const io = require("socket.io")(process.env.PORT || 8000)
+
 const express=require("express");
-const path = require("path");
 const app=express();
+const httpServer=require("http").createServer(app);
+const options={ /* ... */};
+const io = require("socket.io")(httpServer,options);
+const path = require("path");
+
 const users = {};
 io.on("connection", socket => {
     socket.on("new-user-joined", n => {
@@ -30,8 +34,10 @@ app.get("/",(req,res)=>{
   
      res.render("index")
 })
-const PORT=process.env.PORT||3000
-app.listen(PORT,(req,res)=>{
-    console.log("connected");
-})
-//hello world 
+const PORT=process.env.PORT||8000
+// app.listen(PORT,(req,res)=>{
+//     console.log("connected");
+//      hello world 
+// })
+httpServer.listen(PORT);
+
