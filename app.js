@@ -1,4 +1,7 @@
 const io = require("socket.io")(process.env.PORT || 8000)
+const express=require("express");
+const path = require("path");
+const app=express();
 const users = {};
 io.on("connection", socket => {
     socket.on("new-user-joined", n => {
@@ -18,4 +21,16 @@ io.on("connection", socket => {
         delete users[socket.id];
     })
 })
-io.listen(process.env.PORT || 5000)
+
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+app.use(express.static(path.join(__dirname, 'public')))
+app.get("/",(req,res)=>{
+  
+     res.render("index")
+})
+const PORT=process.env.PORT||3000
+app.listen(PORT,(req,res)=>{
+    console.log("connected");
+})

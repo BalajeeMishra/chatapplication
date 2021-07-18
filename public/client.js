@@ -15,6 +15,7 @@ const append = (message, position) => {
     }
 }
 
+
 const n = prompt("Enter your name to join ");
 // const name = "balajee";
 socket.emit("new-user-joined", n);
