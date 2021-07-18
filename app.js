@@ -18,3 +18,4 @@ io.on("connection", socket => {
         delete users[socket.id];
     })
 })
+io.listen(process.env.PORT || 5000)
