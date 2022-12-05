@@ -1,5 +1,6 @@
 // const socket = io("http://localhost:8000");
-var socket = io('https://quiet-tor-11571.herokuapp.com', { transports: ['websocket', 'polling', 'flashsocket'] });
+// var socket = io('https://quiet-tor-11571.herokuapp.com', { transports: ['websocket', 'polling', 'flashsocket'] });
+var socket = io('https://chatapplication-production-9f2f.up.railway.app', { transports: ['websocket', 'polling', 'flashsocket'] });
 const form = document.getElementById("send-container");
 const messageInput = document.getElementById("messageInp");
 const messageContainer = document.querySelector(".container");
