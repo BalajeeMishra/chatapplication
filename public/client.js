@@ -1,5 +1,4 @@
-// const socket = io("http://localhost:8000");
-const socket = io("https://chatapplication-production-9f2f.up.railway.app", {
+const socket = io("/", {
   transports: ["websocket", "polling", "flashsocket"],
 });
 
@@ -31,9 +30,11 @@ if (n != (null || "")) {
       append(`${data.n} : \n${data.message}`, "left");
     }
   });
+
   socket.on("left", (n) => {
     append(`${n} left the chat`, "right");
   });
+
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     const message = messageInput.value;
