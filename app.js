@@ -1,9 +1,11 @@
 // const io = require("socket.io")(process.env.PORT || 8000)
 const express=require("express");
+const http = require('node:http');
 const path = require("path");
 
-const app=express();
-const io = require("socket.io")(app);
+const app= express();
+const io = require("socket.io")(http.Server(app));
+
 const users = {};
 
 io.on("connection", socket => {
