@@ -1,8 +1,11 @@
-const io = require("socket.io")(process.env.PORT || 8000)
+// const io = require("socket.io")(process.env.PORT || 8000)
 const express=require("express");
 const path = require("path");
+
 const app=express();
+const io = require("socket.io")(app);
 const users = {};
+
 io.on("connection", socket => {
     socket.on("new-user-joined", n => {
         console.log("new user ", n);
