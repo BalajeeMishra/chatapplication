@@ -36,5 +36,5 @@ app.get("/", (req, res) => {
 });
 const PORT = process.env.PORT || 3000;
 httpServer.listen(PORT, () => {
-  console.log(`Server started on http://[::1]:${PORT}`);
+  // console.log(`Server started on http://[::1]:${PORT}`);
 });
